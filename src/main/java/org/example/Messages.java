@@ -1,7 +1,6 @@
 package org.example;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 @AllArgsConstructor
@@ -15,8 +14,7 @@ public enum Messages {
     ADD_EMPLOYEE("3 – Add new employee"),
     END_PROGRAM("4 – End program"),
     SALARY_WRONG("Please check if you putted correct employee salary"),
-    NAME_WRONG("Please check if you putted correct employee name"),
-    SURNAME_WRONG("Please check if you putted correct employee surname"),
+    TEXT_WRONG("Please check if you putted correct text"),
     TOTAL_SALARY("Total salary of all employees: "),
     EMPLOYEE_DETAILS("Enter employee details:"),
     EMPLOYEE_NAME("First name: "),

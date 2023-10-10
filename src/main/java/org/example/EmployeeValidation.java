@@ -1,24 +1,24 @@
 package org.example;
 
 import java.math.BigDecimal;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EmployeeValidation {
 
-    public static boolean isValidNameAndSurname(String name) {
-        String regex = "^[A-Za-z]\\w{3,29}$";
-        Pattern p = Pattern.compile(regex);
+    private static final String REGEX = "^[A-Za-z]\\w{3,29}$";
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
+
+    public static boolean isInvalidNameOrSurname(String name) {
         if (name == null) {
-            return false;
+            return true;
         }
-        Matcher m = p.matcher(name);
-        return m.matches();
+        Matcher m = PATTERN.matcher(name);
+        return !m.matches();
     }
-    public static boolean isValidSalary(BigDecimal salary) {
+
+    public static boolean isInvalidSalary(BigDecimal salary) {
         int comparisonResult = salary.compareTo(BigDecimal.ZERO);
-        if (comparisonResult == 0) {
-            return false;
-        }
-        return comparisonResult > 0;
+        return comparisonResult <= 0;
     }
 }

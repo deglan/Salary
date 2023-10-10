@@ -4,35 +4,29 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-
-
+        Scanner scanner = new Scanner(System.in);
         Company company = new Company();
+        CompanyService companyService = new CompanyService();
         boolean endOfProgram = false;
         int choice;
 
         System.out.println(Messages.WELCOME.getMessage());
 
-        while (!endOfProgram) {
-            System.out.println(Messages.MENU.getMessage());
-            System.out.println(Messages.SALARY_SUM.getMessage());
-            System.out.println(Messages.EMPLOYEE_DATA.getMessage());
-            System.out.println(Messages.ADD_EMPLOYEE.getMessage());
-            System.out.println(Messages.END_PROGRAM.getMessage());
-            Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextInt();
-
-            scanner.nextLine();
+        do {
+            printMenu();
+            choice = readChoice(scanner.nextLine());
             switch (choice) {
                 case 1:
-                    BigDecimal totalSalary = company.calculateTotalSalary();
+                    BigDecimal totalSalary = companyService.calculateTotalSalary(company);
                     System.out.println(Messages.TOTAL_SALARY.getMessage() + totalSalary);
                     break;
                 case 2:
-                    company.displayAllEmployeeData();
+                    companyService.displayAllEmployeeData(company);
                     break;
                 case 3:
-                    company.addEmployee(company, scanner);
+                    companyService.addEmployee(company);
                     break;
                 case 4:
                     System.out.println(Messages.EXIT.getMessage());
@@ -41,7 +35,23 @@ public class Main {
                 default:
                     System.out.println(Messages.INVALID_OPTION.getMessage());
             }
-        }
+        } while (!endOfProgram);
 
+    }
+
+    private static void printMenu() {
+        System.out.println(Messages.MENU.getMessage());
+        System.out.println(Messages.SALARY_SUM.getMessage());
+        System.out.println(Messages.EMPLOYEE_DATA.getMessage());
+        System.out.println(Messages.ADD_EMPLOYEE.getMessage());
+        System.out.println(Messages.END_PROGRAM.getMessage());
+    }
+
+    private static int readChoice(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 }
